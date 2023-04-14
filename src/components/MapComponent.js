@@ -13,6 +13,9 @@ import "react-leaflet-markercluster/dist/styles.min.css";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
 
+import IconCourier from "../assets/courier.png";
+import ShadowCourier from "../assets/courier_shadow.png";
+
 function MapComponent(props) {
   // Defining courier and customer location states
   const [courierLocation, setCourierLocation] = useState(props.courierLocation);
@@ -31,6 +34,18 @@ function MapComponent(props) {
     popupAnchor: [0, -35],
   });
 
+  // Defining the courier icon
+  const courierIcon = icon({
+    iconUrl: IconCourier,
+    iconSize: [64, 64],
+    iconAnchor: [32, 32],
+    shadowUrl: ShadowCourier,
+    shadowSize: [64, 64],
+    shadowAnchor: [32, 30],
+    popupAnchor: [0, -35],
+  });
+
+
   // Updating courier and customer location states
   useEffect(() => {
     setCourierLocation(props.courierLocation);
@@ -39,7 +54,7 @@ function MapComponent(props) {
 
   // Adding click event for user location
   function ClickForLocation() {
-    const [position, setPosition] = useState(null);
+    const [position, setPosition] = useState(customerLocation);
     const map = useMapEvents({
       click() {
         map.locate();
@@ -51,11 +66,12 @@ function MapComponent(props) {
     });
 
     // Returning the marker for the user location
-    return position === null ? null : (
+
+/*     return position === null ? null : (
       <Marker position={position} icon={iconMarker}>
         <Popup>Sen buradasın</Popup>
       </Marker>
-    );
+    ); */
   }
 
   // Rendering the map component
@@ -63,10 +79,14 @@ function MapComponent(props) {
     <MapContainer
       className="map"
       center={customerLocation}
-      zoom={13}
+      zoom={25}
       style={{ height: "100vh" }}
     >
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      <Marker position={customerLocation} icon={iconMarker}>
+      </Marker>
+      <Marker position={courierLocation} icon={courierIcon}>    
+      </Marker>
       <ClickForLocation />
     </MapContainer>
   );

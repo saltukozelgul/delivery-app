@@ -7,8 +7,8 @@ Includes an order card that shows the price, time, and image of the food.
 Responsive design that works on different screen sizes.
 
 ## Technologies Used
-React
-Leaflet (for displaying the map)
-React Leaflet (for using Leaflet with React)
-HTML
-CSS
+1. React
+2. Leaflet (for displaying the map)
+3. React Leaflet (for using Leaflet with React)
+4. HTML
+5. CSS
