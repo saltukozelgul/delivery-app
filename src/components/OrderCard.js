@@ -10,7 +10,7 @@ function OrderCard(props) {
       </div>
       <div className="order-card__info">
         <p className="order-card__price">{price}</p>
-        <p className="order-card__time">{time}</p>
+        <p className="order-card__time">Sipariş Tarihi: {time}</p>
       </div>
     </div>
   );

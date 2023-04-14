@@ -6,7 +6,7 @@ function App() {
   const courierLocation = [51.505, -0.09];
   const customerLocation = [51.51, -0.1];
   const order = {
-    price: 10,
+    price: "10₺",
     time: '12:30 PM',
     picture: 'https://www.example.com/order.jpg',
   };
