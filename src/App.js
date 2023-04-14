@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import MapComponent from './components/MapComponent';
+import OrderCard from './components/OrderCard';
 
 function App() {
+  const courierLocation = [51.505, -0.09];
+  const customerLocation = [51.51, -0.1];
+  const order = {
+    price: 10,
+    time: '12:30 PM',
+    picture: 'https://www.example.com/order.jpg',
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="main-content">
+      <MapComponent
+        courierLocation={courierLocation}
+        customerLocation={customerLocation}
+      />
+     <OrderCard price={order.price} time={order.time} image={order.picture} />
     </div>
   );
 }
