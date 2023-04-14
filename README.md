@@ -6,6 +6,9 @@ Displays a map with two markers: one for the courier's location and another for 
 Includes an order card that shows the price, time, and image of the food.
 Responsive design that works on different screen sizes.
 
+## Live Demo
+https://delivery-app-lyart.vercel.app/
+
 ## Technologies Used
 1. React
 2. Leaflet (for displaying the map)

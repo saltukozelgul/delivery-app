@@ -23,6 +23,25 @@ function MapComponent(props) {
     props.customerLocation
   );
 
+  // For testing purposes this function is used to update the courier location
+  function updateCourierLocation() {
+    const index = Math.floor(Math.random() * 10);
+    const newLocation = [
+      props.courierLocation[0] + index / 10000,
+      props.courierLocation[1] + index / 10000,
+    ];
+    setCourierLocation(newLocation);
+    console.log("Location updated")
+    console.log("Index: " + index)
+  }
+
+  // Call the updateCourierLocation function every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(updateCourierLocation, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+
   // Defining icon marker for the map
   const iconMarker = icon({
     iconUrl: markerIcon,
@@ -54,24 +73,14 @@ function MapComponent(props) {
 
   // Adding click event for user location
   function ClickForLocation() {
-    const [position, setPosition] = useState(customerLocation);
     const map = useMapEvents({
       click() {
         map.locate();
       },
       locationfound(e) {
-        setPosition(e.latlng);
         map.flyTo(e.latlng, map.getZoom());
       },
     });
-
-    // Returning the marker for the user location
-
-/*     return position === null ? null : (
-      <Marker position={position} icon={iconMarker}>
-        <Popup>Sen buradasın</Popup>
-      </Marker>
-    ); */
   }
 
   // Rendering the map component
