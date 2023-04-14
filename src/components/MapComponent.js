@@ -74,11 +74,16 @@ function MapComponent(props) {
   // Adding click event for user location
   function ClickForLocation() {
     const map = useMapEvents({
+      /*  
+      Eger kullanici konumunu istemek istemiyorsak bu fonksiyonu kullanabiliriz. 
       click() {
         map.locate();
-      },
+      }, 
       locationfound(e) {
         map.flyTo(e.latlng, map.getZoom());
+      },*/
+      click() {
+        map.flyTo(customerLocation, map.getZoom());
       },
     });
   }
