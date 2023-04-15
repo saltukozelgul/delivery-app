@@ -11,7 +11,6 @@ const CustomCard = (props) => {
     <CardMedia
         component="img"
         alt="thumbnail"
-        height="100"
         image={infoThumb}
       />
       <CardContent>

@@ -34,6 +34,10 @@ code {
   z-index: 1000;
 }
 
+.MuiCardMedia-img {
+  height: 10rem;
+}
+
 /* Responsive */
 @media only screen and (max-width: 600px) {
   .custom-card {
@@ -43,6 +47,10 @@ code {
     left: 1%;
     width: 98%;
     z-index: 1000;
+  }
+
+  .MuiCardMedia-img {
+    height: 5rem;
   }
 }
 
