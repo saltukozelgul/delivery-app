@@ -2,7 +2,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia  from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import infoThumb from '../assets/info_thumb.png';
+import infoThumb from '../assets/rider.gif';
 
 const CustomCard = (props) => {
     const { price, time, esttime } = props;
@@ -11,12 +11,12 @@ const CustomCard = (props) => {
     <CardMedia
         component="img"
         alt="thumbnail"
-        height="140"
+        height="250"
         image={infoThumb}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Siparişiniz hazırlanıyor..
+          Siparişiniz yolda!
         </Typography>
         <Typography variant="body2" color="text.secondary">
             Sipariş Tarihi: {time}
