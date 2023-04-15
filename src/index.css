@@ -36,6 +36,8 @@ code {
 
 .MuiCardMedia-img {
   height: 10rem;
+  background-position: start;
+
 }
 
 /* Responsive */

@@ -19,10 +19,8 @@ import CustomCard from "./CustomCard";
 function MapComponent(props) {
   // Defining courier and customer location states
   const [courierLocation, setCourierLocation] = useState(props.courierLocation);
-  const [customerLocation, setCustomerLocation] = useState(
-    props.customerLocation
-  );
-
+  const [customerLocation, setCustomerLocation] = useState(props.customerLocation);
+  const [isFollowing, setIsFollowing] = useState(true);
   // Defining icon marker for the map
   const iconMarker = icon({
     iconUrl: markerIcon,
@@ -72,7 +70,7 @@ function MapComponent(props) {
     [39.9625, 32.7873],
     [39.9623, 32.7868],
   ];
-  function updateCourierLocation() {
+  function UpdateCourierLocation() {
     var newLocation = path[index];
     setCourierLocation(newLocation);
     console.log("Location updated");
@@ -82,7 +80,7 @@ function MapComponent(props) {
 
   // Call the updateCourierLocation function every 1 seconds
   useEffect(() => {
-    const interval = setInterval(updateCourierLocation, 1000);
+    const interval = setInterval(UpdateCourierLocation, 1000);
     return () => clearInterval(interval);
   }, );
 
@@ -91,6 +89,21 @@ function MapComponent(props) {
     setCourierLocation(props.courierLocation);
     setCustomerLocation(props.customerLocation);
   }, [props.courierLocation, props.customerLocation]);
+
+
+  function UpdateCourier() {
+    const map = useMapEvents({
+      click() {
+        setIsFollowing(true);
+      },
+      drag() {
+        setIsFollowing(false);
+      },
+    });
+    if (isFollowing) {
+      map.flyTo(courierLocation, map.getZoom());
+    }
+  }
 
   // Adding click event for user location
   function ClickForLocation() {
@@ -125,6 +138,7 @@ function MapComponent(props) {
         <Marker position={customerLocation} icon={iconMarker}></Marker>
         <Marker position={courierLocation} icon={courierIcon}></Marker>
         <ClickForLocation />
+        <UpdateCourier />
       </MapContainer>
       <CustomCard
         price={order.price}
