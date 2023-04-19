@@ -43,13 +43,6 @@ function MapComponent(props) {
     popupAnchor: [0, -35],
   });
 
-  // Defining the order object
-  const order = {
-    price: "",
-    time: "12:30",
-    esttime: "15 dk",
-  };
-
   // For testing purposes this function is used to update the courier location
   const [index, setIndex] = useState(0);
   const path = [
@@ -91,9 +84,11 @@ function MapComponent(props) {
   }, [props.courierLocation, props.customerLocation]);
 
 
+  // This function is used to update the courier location
   function UpdateCourier() {
     const map = useMapEvents({
       click() {
+        map.flyTo(courierLocation, map.getZoom());
         setIsFollowing(true);
       },
       drag() {
@@ -105,25 +100,21 @@ function MapComponent(props) {
     }
   }
 
-  // Adding click event for user location
-  function ClickForLocation() {
+  // Eğer kullanıcıdan konumu alıp kullancıyı orada başlatırsak
+  // bu fonksiyonu kullanabiliriz ancak bize zaten konumun verilecegini
+  // dusunuerek bu fonksiyonu kullanmadım
+  
+  /* function ClickForLocation() {
     const map = useMapEvents({
-      /*  
-      Eger kullanici konumunu istemek istiyorsak bu fonksiyonu kullanabiliriz. 
-      Ama tahminmince bu componente gelen propslardan biri olarak konum bilgisi gelecek o yuzden bu fonksiyonu kullanmayacagiz.
-      
+
         click() {
           map.locate();
         }, 
         locationfound(e) {
           map.flyTo(e.latlng, map.getZoom());
         },
-      */
-      click() {
-        map.flyTo(courierLocation, map.getZoom());
-      },
     });
-  }
+  } */
 
   // Rendering the map component
   return (
@@ -137,13 +128,12 @@ function MapComponent(props) {
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <Marker position={customerLocation} icon={iconMarker}></Marker>
         <Marker position={courierLocation} icon={courierIcon}></Marker>
-        <ClickForLocation />
         <UpdateCourier />
       </MapContainer>
       <CustomCard
-        price={order.price}
-        time={order.time}
-        esttime={order.esttime}
+        price={props.price}
+        time={props.time}
+        esttime={props.esttime}
       />
     </>
   );
