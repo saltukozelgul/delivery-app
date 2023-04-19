@@ -21,6 +21,8 @@ function MapComponent(props) {
   const [courierLocation, setCourierLocation] = useState(props.courierLocation);
   const [customerLocation, setCustomerLocation] = useState(props.customerLocation);
   const [isFollowing, setIsFollowing] = useState(true);
+  const [title, setTitle] = useState("Siparişiniz yolda!");
+  const [subtitle, setSubtitle] = useState("");
   // Defining icon marker for the map
   const iconMarker = icon({
     iconUrl: markerIcon,
@@ -71,9 +73,9 @@ function MapComponent(props) {
     setIndex((index + 1) % path.length);
   }
 
-  // Call the updateCourierLocation function every 1 seconds
+  // Call the updateCourierLocation function every 2 seconds
   useEffect(() => {
-    const interval = setInterval(UpdateCourierLocation, 1000);
+    const interval = setInterval(UpdateCourierLocation, 2000);
     return () => clearInterval(interval);
   }, );
 
@@ -97,6 +99,15 @@ function MapComponent(props) {
     });
     if (isFollowing) {
       map.flyTo(courierLocation, map.getZoom());
+    }
+    // If the courier is near the customer, change the title
+    if (Math.abs(courierLocation[0] - customerLocation[0]) < 0.0001 && Math.abs(courierLocation[1] - customerLocation[1]) < 0.0001) {
+      setTitle("Kuryemiz kapıda");
+      setSubtitle("Siparişiniz birazdan teslim edilecektir.");
+    }
+    else {
+      setTitle("Siparişiniz yolda!");
+      setSubtitle("");
     }
   }
 
@@ -131,6 +142,8 @@ function MapComponent(props) {
         <UpdateCourier />
       </MapContainer>
       <CustomCard
+        title={title}
+        subtitle={subtitle}
         price={props.price}
         time={props.time}
         esttime={props.esttime}

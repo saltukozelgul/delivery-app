@@ -8,7 +8,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import infoThumb from '../assets/rider.gif';
 
 const CustomCard = (props) => {
-    const { price, time, esttime } = props;
+    const { price, time, esttime, title,subtitle } = props;
   return (
     <Card className='custom-card'>
     <CardMedia
@@ -18,7 +18,10 @@ const CustomCard = (props) => {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Siparişiniz yolda!
+          {title}
+          <Typography variant="body2" color="text.secondary">
+            {subtitle}
+         </Typography>
         </Typography>
         <Typography variant="body2" color="text.secondary">
             Sipariş Tarihi: {time}
